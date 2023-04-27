@@ -1,37 +1,39 @@
-# import lib
+# Password Generator Project
 import random
 import time
-from os import path
-from art import rock, paper, scissors, welcome
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
+           'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
-while True:
-    # Welcome message and game start
-    print(
-        f"\n\nWelcome to ROCK PAPER & SCISSORS GAME BY YJ-928\n{welcome}")
-    time.sleep(2)
+print("\nWelcome to the PyPassword Generator by YJ-928")
+nr_letters = int(input("How many letters would you like in your password?\n"))
+nr_symbols = int(input("How many symbols would you like?\n"))
+nr_numbers = int(input("How many numbers would you like?\n"))
 
-    # taking user input
-    User_Choice = input(
-        "What Do You Choose? Type 0 for Rock, 1 for Paper, 2 for Scissors\n")
-    time.sleep(1)
+# creating an empty list
+Password_List = []
 
-    # printing user input equivalent ASCII Art
-    print("\nYou Chose\n")
-    print(rock) if User_Choice == "0" else print(
-        paper) if User_Choice == "1" else print(scissors)
+# looping and appending user specified random characters to the Password_List
+for letter in range(0, nr_letters+1):
+    Password_List.append(random.choice(letters))
 
-    # computer choice generation
-    Computer_Choice = str(random.randrange(0, 3))
-    time.sleep(1)
+for symbol in range(0, nr_symbols+1):
+    Password_List.append(random.choice(symbols))
 
-    # printing Computer choice equivalent ASCII Art
-    print("\nComputer Chose\n")
-    print(rock) if Computer_Choice == "0" else print(
-        paper) if Computer_Choice == "1" else print(scissors)
+for number in range(0, nr_numbers+1):
+    Password_List.append(random.choice(numbers))
 
-    # printing final win,lose or tie result
-    print("\n👑 You Win 👑\n") if User_Choice == 0 and Computer_Choice == 2 else print("\n🥹 🥺 You Lose 🥹 🥺\n") if User_Choice == 2 and Computer_Choice == 0 else print(
-        "\n👑 You Win 👑\n") if User_Choice > Computer_Choice else print("\n🥹 🥺 You Lose 🥹 🥺\n") if User_Choice < Computer_Choice else print("\n🤝 Its a Tie 🤝\n")
+# Shuffling the contents of Password_List to mix above 3 categories
+random.shuffle(Password_List)
 
-    if input("Do you want to play again? Y or N ").upper() == "N":
-        break
+# initializing an empty string
+password = " "
+
+# Converting the Password_List to string
+for item in Password_List:
+    password += str(item)
+
+# printing out the strong user specific created password
+print(f"\nYour Password is:  {password}\n\n")
+time.sleep(5)
